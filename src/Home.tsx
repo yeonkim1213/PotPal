@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Image, ScrollView, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, View, TextInput, Image, ScrollView, TouchableHighlight, ImageBackground } from "react-native";
 import { Entypo, Ionicons, Octicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
   return (
@@ -36,15 +37,36 @@ export default function App() {
       </View>
 
 
-      <ScrollView style = {{flex: 1, borderWidth: 2, marginTop: 5}}>
-        <View>
-
-        </View>
+      <ScrollView style = {{flex: 1, margin: 5, padding: 10}}>
+        
+          <ImageBackground source={require('../assets/pot.jpg')} resizeMode="cover" style={{ aspectRatio: 1, borderRadius: 15}} imageStyle={{ borderRadius: 15}}>
+            <LinearGradient style={{borderRadius: 15}} colors={['rgba(217,217,217,0)', 'rgba(217,217,217,0.32)', 'rgba(217,217,217,1)']}>
+              <View style={{width: '100%', aspectRatio: 1, borderRadius: 15, justifyContent: 'flex-end', display:'flex', padding: 7}}>
+                <Text style={{fontSize: 20, padding: 2, paddingBottom: 3}}>Cooking Pot</Text>
+                <View style={{flexDirection: 'row', padding: 2}}>
+                  <Image source={require('../assets/icon.png')} style={{ aspectRatio: 1, borderRadius: 15, width: 30,}}></Image>
+                  <View style={{paddingLeft: 5}}>
+                    <Text style={{fontSize: 12, paddingBottom: 2}}>Username</Text>
+                    <Text style={{fontSize: 10}}><Octicons name="star-fill" size={12} color="black" />4.0</Text>
+                  </View>
+                </View>
+                <View style={{flexDirection: 'row', display:'flex', justifyContent: 'space-between', padding: 2}}>
+                  <Text style={{fontSize: 12, paddingLeft: 1,}}><Entypo name="location-pin" size={20} color="black" />1 mile</Text>
+                  <Text style={{fontSize: 12, paddingLeft: 1,}}><Ionicons name="pie-chart-outline" size={20} color="black" />90% new</Text>
+                  <Text style={{fontSize: 12, paddingLeft: 1,}}><Ionicons name="calendar-outline" size={20} color="black" />During weekdays</Text>
+                </View>
+              </View>
+            </LinearGradient>
+          </ImageBackground>
 
       </ScrollView>
 
+      <View style={{width: '100%', height: 77, position: 'absolute', bottom: 0, zIndex: -1}}>
+      <ImageBackground source={require('../assets/menu.png')} resizeMode="cover">
+      
       {/* Menu bar */}
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+
         {/* Home Icon */}
         <TouchableHighlight style = {{justifyContent: 'flex-end',}} onPress = {()=>{console.log("Pressed")}} underlayColor = 'transparent'>
           <View style={styles.menuIcon}>
@@ -83,10 +105,11 @@ export default function App() {
             <Text style = {{color: '#155A03'}}>Account</Text>
           </View>
         </TouchableHighlight>
-
-
       </View>
-      <Image source={require('../assets/menu.png')} style={{width: '100%', height: 77, position: 'absolute', bottom: 0, zIndex: -1}}/>
+      {/* <Image source={require('../assets/menu.png')} style={{width: '100%', height: 77, position: 'absolute', bottom: 0, zIndex: -1}}/> */}
+      </ImageBackground>
+      </View>
+
 
 
     </View>
