@@ -1,7 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Image, ScrollView, TouchableHighlight, ImageBackground } from "react-native";
-import { Entypo, Ionicons, Octicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, View, ScrollView} from "react-native";
 import Menu from './component/menu';
 import Search from './component/search';
 import Post from './component/post';
