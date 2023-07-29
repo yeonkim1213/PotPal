@@ -37,27 +37,4 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     paddingTop: 30,
   },
-
-  input: {
-    // flex: 0.8,
-    height: 40,
-    width: '60%',
-    margin: 0,
-    padding: 0
-  },
-
-  filter: {
-    padding: 10,
-    // alignSelf: 'flex-end',
-  },
-
-  menuIcon: {
-    flexDirection: 'column', 
-    // justifyContent: 'flex-end', 
-    alignItems: 'center',
-    color: '#155A03',
-    textDecorationColor: '#155A03',
-    paddingLeft: 10,
-    paddingRight: 10
-  }
 });
