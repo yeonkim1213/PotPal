@@ -1,39 +1,46 @@
-import { FlatList } from "react-native";
+import { FlatList, TextInput } from "react-native";
 import Transaction from "./Transaction.js";
-import transactions from "./mock_data/transactions.js";
-
-//Using dates as Date/string; maybe we convert beforehand?
-//Work on filtering mechanisms
-//Make name a prop
+import transactions from "../mock_data/transactions.js";
+import { convertDateToString } from "./CalendarButton.js";
 
 function TransactionPage(props) {
-  const filteredTransactions = [];
+  // console.log(transactions);
+  const name = props.name;
+  // console.log(name);
 
-  function filterDataByName(object) {
-    let num = 0;
-    if (
-      !(object.lenderName === props.name || object.receiverName === props.name)
-    ) {
-      delete transactions[num];
+  function filterDataByName(originalTransactions) {
+    let filteredTransactions = [];
+    let filteredIndex = 0;
+    for (let i = 0; i < originalTransactions.length; i++) {
+      let object = originalTransactions[i];
+      if (object.lenderName === name || object.receiverName === name) {
+        filteredTransactions[filteredIndex] = object;
+        filteredIndex++;
+      }
     }
-    num++;
+    return filteredTransactions;
   }
 
   function convertObjectToStringDate(object) {
-    if (object.lenderName === props.name) {
+    const date = convertDateToString(object.date);
+    if (object.lenderName === name) {
       return [
         "You lent a " + object.itemName + " to " + object.receiverName + ".",
-        object.date,
+        date,
       ];
     } else {
       return [
         object.lenderName + " lent a " + object.itemName + " to you.",
-        object.date,
+        date,
       ];
     }
   }
 
-  const dataValues = transactions.map(convertObjectToStringDate);
+  const filteredTransactionsArr = filterDataByName(transactions);
+  // console.log("filtered");
+  // console.log(filteredTransactionsArr);
+
+  const dataValues = filteredTransactionsArr.map(convertObjectToStringDate);
 
   return (
     <FlatList

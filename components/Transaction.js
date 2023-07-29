@@ -2,7 +2,7 @@
 
 import { View, Text, StyleSheet } from "react-native";
 
-export function Transaction(props) {
+function Transaction(props) {
   return (
     <View style={styles.transactionBox}>
       <Text style={styles.textStyle}>{props.text}</Text>
@@ -36,3 +36,5 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
+
+export default Transaction;

@@ -1,31 +1,39 @@
-//Image upload
 //Use this post to make everything accessible: https://www.netguru.com/blog/accessibility-in-react-native
 //Make fields required—https://stackoverflow.com/questions/51665162/how-can-i-make-a-textfield-in-react-native-required
 //For transaction page, should we use dates?
 
 //Using dates as Date/string; maybe we convert beforehand?
 //Work on filtering mechanisms
-//Make name a prop
 
-import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  Image,
+  SectionListComponent,
+} from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import React from "react";
 import CurrencyInput from "react-native-currency-input";
 import CalendarButton from "./CalendarButton";
+import TransactionPage from "./TransactionPage.js";
 import * as ImagePicker from "expo-image-picker";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 //Image Picker code from Expo Image Picker
 //Currency input code from example Github for currency input
 //Calendar code taught by Declan Miller
 
-export function PostForm() {
+function PostForm() {
   const data = [
     { key: 1, value: "New" },
     { key: 2, value: "Good" },
     { key: 3, value: "Used" },
   ];
 
-  const [image, setImage] = React.useState();
+  const [image, setImage] = React.useState(null);
   const [itemName, setItemName] = React.useState("");
   const [brand, setBrand] = React.useState("");
   const [price, setPrice] = React.useState(0);
@@ -34,6 +42,7 @@ export function PostForm() {
   const [dropdownValue, setDropdownValue] = React.useState("");
   const [currencyColor, setCurrencyColor] = React.useState("#5A5A5A");
   const [selectListColor, setSelectListColor] = React.useState("#5A5A5A");
+  const [icon, setIcon] = React.useState("add-circle-outline");
 
   const today = new Date();
   const tomorrow = new Date(today);
@@ -52,27 +61,23 @@ export function PostForm() {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+      if (icon === "add-circle-outline") {
+        setIcon("md-checkmark-circle");
+        alert("Image uploaded");
+      } else {
+        alert("New image uploaded");
+      }
     }
   };
 
   return (
-    <YStack>
+    <View>
       <Text style={styles.headingStyle}>Share with your community!</Text>
 
       <Text style={styles.labelStyle}>Upload an image</Text>
-
-      {/* <FontAwesome.Button
-        name="plus-circle"
-        color="#155A03"
-        onPress={pickImage}
-      ></FontAwesome.Button> */}
-
-      {/* <View>
-        <Button title="" onPress={pickImage} />
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        )}
-      </View> */}
+      <View style={[styles.inputContainer, styles.plusIconStyles]}>
+        <Ionicons name={icon} size={35} color="#155A03" onPress={pickImage} />
+      </View>
 
       <Text style={styles.labelStyle} onChangeText={setItemName}>
         Name of item
@@ -143,11 +148,18 @@ export function PostForm() {
           accessibilityLabel="This is a button to make a post"
         />
       </View>
-    </YStack>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  plusIconStyles: {
+    width: 150,
+    paddingLeft: 55,
+    paddingRight: "auto",
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
   imageVariant: {
     height: 60,
     width: 150,
@@ -224,3 +236,5 @@ const styles = StyleSheet.create({
     textAlignVertical: "auto",
   },
 });
+
+export default PostForm;

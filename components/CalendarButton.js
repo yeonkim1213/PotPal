@@ -4,7 +4,17 @@ import { View, StyleSheet } from "react-native";
 import React from "react";
 import Button from "apsl-react-native-button";
 
-export function CalendarButton(props) {
+export const convertDateToString = (date) => {
+  return (
+    (date.getMonth() + 1).toLocaleString() +
+    "/" +
+    date.getDate().toLocaleString() +
+    "/" +
+    date.getFullYear().toString()
+  );
+};
+
+function CalendarButton(props) {
   const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
   const [buttonValue, setButtonValue] = React.useState("mm/dd/yyyy");
   const [textColor, setTextColor] = React.useState("#5A5A5A");
@@ -17,13 +27,7 @@ export function CalendarButton(props) {
     setDatePickerVisibility(false);
   };
   const handleConfirm = (date) => {
-    setButtonValue(
-      (date.getMonth() + 1).toLocaleString() +
-        "/" +
-        date.getDate().toLocaleString() +
-        "/" +
-        date.getFullYear().toString(),
-    );
+    setButtonValue(convertDateToString(date));
 
     setTextColor("black");
     props.setDate(date);
