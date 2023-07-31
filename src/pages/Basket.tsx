@@ -5,7 +5,7 @@ import Search from '../component/search';
 import Post from '../component/post';
 
 
-function Basket() {
+const basket = ()=> {
     return (
         <View style={styles.container}>
         {/* Search bar */}  
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
     },
 })  
 
-export default Basket;
+export default basket;

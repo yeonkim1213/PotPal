@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, TouchableHighlight } from "react-native";
 import { Entypo, Ionicons } from '@expo/vector-icons';
-// import {userRouter} from 
+import { useRouter } from "expo-router";
 
 
 function Search() {
+  const router = useRouter();
     return (
       <View style = {{flexDirection: 'row', justifyContent: 'space-around'}}>
           <View style = {{flexDirection: 'row', justifyContent: 'space-between', borderWidth: 2, borderRadius: 20, borderColor: '#155A03'}}>
@@ -28,7 +29,7 @@ function Search() {
         </View>
 
         {/* Basket Icon */}
-        <TouchableHighlight style={{alignItems:'center',justifyContent:'center', borderWidth: 2, width: 50, height: 50, borderRadius: 25, borderColor: '#155A03'}} onPress = {()=>{console.log("Pressed")}} underlayColor = 'transparent'>
+        <TouchableHighlight style={{alignItems:'center',justifyContent:'center', borderWidth: 2, width: 50, height: 50, borderRadius: 25, borderColor: '#155A03'}} onPress = {()=>{router.replace('../pages/basket')}} underlayColor = 'transparent'>
               <View>
               <Ionicons name="basket-outline" size={24} color="#155A03" />
               </View>
