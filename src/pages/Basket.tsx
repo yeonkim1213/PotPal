@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView} from "react-native";
+import { StyleSheet, View, ScrollView, Text} from "react-native";
 import Menu from '../component/menu';
 import Search from '../component/search';
 import Post from '../component/post';
@@ -9,15 +9,8 @@ const basket = ()=> {
     return (
         <View style={styles.container}>
         {/* Search bar */}  
-        <ScrollView style = {{flex: 1, margin: 5, padding: 10, zIndex: -2}}>
-          
-          <Post />
-  
-        </ScrollView>
-  
-        
+            <Text>Hello</Text>
         {/* Menu bar */}
-        <Menu />
   
   
   
