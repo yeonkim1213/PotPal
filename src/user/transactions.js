@@ -25,7 +25,7 @@ export const transactions = [
   },
 ];
 
-let pwd = qx1mQUwV5d32Cbo5;
+// let pwd = qx1mQUwV5d32Cbo5;
 //let link = mongodb+srv://PotPal:<password>@cluster0.ar2y784.mongodb.net/?retryWrites=true&w=majority;
 
 
