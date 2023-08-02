@@ -21,6 +21,7 @@ import CalendarButton from "./CalendarButton";
 import TransactionPage from "./TransactionPage.js";
 import * as ImagePicker from "expo-image-picker";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useRouter } from "expo-router";
 
 //Image Picker code from Expo Image Picker
 //Currency input code from example Github for currency input
@@ -69,6 +70,8 @@ function PostForm() {
       }
     }
   };
+
+  const router = useRouter();
 
   return (
     <View>
@@ -141,6 +144,8 @@ function PostForm() {
         dropdownTextStyles={styles.dropdownTextStyles}
       />
 
+      {/* <TransactionPage name="Elsa"></TransactionPage> */}
+
       <View style={styles.postButtonStyling}>
         <Button
           title="Post"
@@ -150,6 +155,7 @@ function PostForm() {
       </View>
     </View>
   );
+  //Rendering a new page: onPress={() => router.replace("/signup")}
 }
 
 const styles = StyleSheet.create({
