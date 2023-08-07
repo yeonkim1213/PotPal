@@ -61,8 +61,15 @@ export default () => {
       backgroundColor="#ddf"
     >
       <Stack.Screen options={{ title: "Home" }} />
-      <Button href="/login" onPress={() => router.replace("/login")}>
+      <Button
+        href="/login"
+        onPress={() => router.replace("/login")}
+        style={{ margin: 10 }}
+      >
         Click Me
+      </Button>
+      <Button href="/login" onPress={() => router.replace("/postform")}>
+        Make a post form!
       </Button>
     </YStack>
   );
