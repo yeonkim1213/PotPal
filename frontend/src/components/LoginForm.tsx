@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Alert } from "react-native";
-import { Anchor, Button, Input, XStack, YStack, Text } from "tamagui";
+import { Alert, StyleSheet, Text } from "react-native";
+import { Anchor, Button, Input, XStack, YStack } from "tamagui";
 import { useMutation } from "@tanstack/react-query";
 import { sendLogin } from "../api/sendLogin";
 import { useRouter } from "expo-router";
-import { Soup } from "@tamagui/lucide-icons";
+import { Image } from "expo-image";
 
 export function LoginForm() {
   const router = useRouter();
@@ -33,9 +33,12 @@ export function LoginForm() {
       space={20}
       backgroundColor="white"
     >
-      <YStack padding="$15" alignItems="center" justifyContent="center">
+      <YStack padding="$13" alignItems="center" justifyContent="center">
         <XStack alignItems="center" justifyContent="center">
-          <Soup size="$5"></Soup>
+          <Image
+            source={require("../../assets/logo.png")}
+            style={styles.imageStyle}
+          />
         </XStack>
       </YStack>
 
@@ -90,8 +93,17 @@ export function LoginForm() {
         Create new account
       </Button>
       <XStack justifyContent="center">
-        <Text fontStyle="italic">PotPal</Text>
+        <Text style={{ fontWeight: "bold", fontStyle: "italic" }}>PotPal</Text>
       </XStack>
     </YStack>
   );
 }
+
+const styles = StyleSheet.create({
+  imageStyle: {
+    width: 100,
+    height: 100,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
