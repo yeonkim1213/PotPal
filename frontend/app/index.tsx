@@ -67,6 +67,13 @@ export default () => {
   //   setOpeningScreenVisible(false);
   // }, 5000);
 
+  const changeScreen = () =>{
+    setTimeout(()=>{
+      router.replace('/login')
+    }, 5000)
+  }
+
+  changeScreen();
   return (
     <YStack
       flex={1}
