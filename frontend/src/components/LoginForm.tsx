@@ -13,7 +13,7 @@ export function LoginForm() {
   const { mutate: login } = useMutation(() => sendLogin(email, password), {
     onSuccess: (data) => {
       if (data.success) {
-        router.replace("home");
+        router.replace("/home");
       } else {
         Alert.alert("Login Failed", data.message);
       }
