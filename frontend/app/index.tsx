@@ -1,13 +1,9 @@
 import { Stack } from "expo-router";
-import { Button, YStack } from "tamagui";
-import { useRouter } from "expo-router";
+import { YStack } from "tamagui";
+import { LogoScreen } from "../src/components/Logo";
 import { useEffect, useState } from "react";
-import { Image } from "expo-image";
-import { StyleSheet, View } from "react-native";
-import Menu from "../src/components/menu";
 
 export default () => {
-  const router = useRouter();
   const [avail, setAvail] = useState([]);
 
   const fetchAvailData = () => {
@@ -67,13 +63,6 @@ export default () => {
   //   setOpeningScreenVisible(false);
   // }, 5000);
 
-  const changeScreen = () =>{
-    setTimeout(()=>{
-      router.replace('/login')
-    }, 5000)
-  }
-
-  changeScreen();
   return (
     <YStack
       flex={1}
@@ -86,28 +75,7 @@ export default () => {
           headerShown: false,
         }}
       />
-
-      <Image source={require("../assets/logo.png")} style={styles.imageStyle} />
-      <Menu />
-      {/* <Button
-        href="/login"
-        onPress={() => router.replace("/login")}
-        style={{ margin: 10 }}
-      >
-        Click Me
-      </Button>
-      <Button href="/login" onPress={() => router.replace("/postform")}>
-        Make a post form!
-      </Button> */}
+      <LogoScreen />
     </YStack>
   );
 };
-
-const styles = StyleSheet.create({
-  imageStyle: {
-    width: 100,
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
