@@ -1,13 +1,9 @@
 import { Stack } from "expo-router";
-import { Button, YStack } from "tamagui";
-import { useRouter } from "expo-router";
+import { YStack } from "tamagui";
+import { LogoScreen } from "../src/components/Logo";
 import { useEffect, useState } from "react";
-import { Image } from "expo-image";
-import { StyleSheet, View } from "react-native";
-import Menu from "../src/components/menu";
 
 export default () => {
-  const router = useRouter();
   const [avail, setAvail] = useState([]);
 
   const fetchAvailData = () => {
@@ -79,18 +75,13 @@ export default () => {
           headerShown: false,
         }}
       />
+<<<<<<< HEAD
 
       <Image source={require("../assets/logo.png")} style={styles.imageStyle} />
       <Menu />
+=======
+      <LogoScreen />
+>>>>>>> 05a1d7a0d734fb282c0025f8b393e9dae576e567
     </YStack>
   );
 };
-
-const styles = StyleSheet.create({
-  imageStyle: {
-    width: 100,
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
