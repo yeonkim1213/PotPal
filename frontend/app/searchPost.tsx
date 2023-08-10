@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TextInput, Pressable, Text, ImageBackground, Image } from "react-native";
 import { Entypo, Ionicons, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
-import { Link, useRouter } from "expo-router";
+import { Link, Stack, useRouter } from "expo-router";
 import { ScrollView, XStack, YStack } from 'tamagui';
 import { LinearGradient } from 'expo-linear-gradient';
 import Menu from '../src/components/menu';
@@ -54,7 +54,7 @@ function SearchPost() {
   const renderPost = (posts) => {
     return posts.map(element => {
         return(
-            <ImageBackground key={element.id} source={{uri: element.itemImage}} resizeMode="cover" style={{ aspectRatio: 1, borderRadius: 15, marginBottom: 15}} imageStyle={{ borderRadius: 15}}>
+            <ImageBackground key={element.id} source={{uri: element.itemImage}} resizeMode="cover" style={{ aspectRatio: 1, borderRadius: 15, marginBottom: 15, zIndex: -1}} imageStyle={{ borderRadius: 15}}>
             <LinearGradient style={{borderRadius: 15}} colors={['rgba(217,217,217,0)', 'rgba(217,217,217,0.32)', 'rgba(217,217,217,1)']}>
                 <View style={{width: '100%', aspectRatio: 1, borderRadius: 15, justifyContent: 'space-between', display:'flex', padding: 7}}>
                   <XStack style={{justifyContent: 'flex-end'}}>
@@ -99,8 +99,13 @@ function SearchPost() {
 
     return (
       <>
+      <Stack.Screen
+      options={{
+        headerShown: false,
+      }}/>
+
       <View style={styles.container}>
-      <View style = {{flexDirection: 'row', justifyContent: 'space-around'}}>
+      <View style = {{flexDirection: 'row', justifyContent: 'space-around', zIndex: 2}}>
           <View style = {{flexDirection: 'row', justifyContent: 'space-between', borderWidth: 2, borderRadius: 20, borderColor: '#155A03'}}>
             <View style = {{flexDirection: 'row', alignItems: 'center'}}>
               {/* Search Icon */}
