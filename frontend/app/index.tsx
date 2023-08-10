@@ -32,10 +32,20 @@ export default () => {
     }
     // handle error
   }).then(task => {
+    console.log(task.available);
+    for (let index = 0; index < task.basketList.length; index++) {
+      const indexOfObject = task.available.findIndex((object) => {
+        return object.id === task.basketList[index].id;
+      })    
+      if (indexOfObject !== -1) {
+        task.available.splice(indexOfObject, 1);
+      }
+    }
+
     fetch('https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/1', {
       method: 'PUT', // or PATCH
       headers: {'content-type':'application/json'},
-      body: JSON.stringify({basket: task.basketList.length})
+      body: JSON.stringify({basket: task.basketList.length, available: task.available})
     }).then(res => {
       if (res.ok) {
           return res.json();

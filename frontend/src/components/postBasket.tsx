@@ -6,6 +6,7 @@ import { Entypo, Ionicons, Octicons } from '@expo/vector-icons';
 
 
 function PostBasket() {
+  const router = useRouter();
     const [posts, setPosts] = useState([])
 
     const fetchBasketData = () => {
@@ -73,6 +74,7 @@ function PostBasket() {
       .catch((error) => {
         // handle error
       });
+      router.replace('/basket')
   };
 
 

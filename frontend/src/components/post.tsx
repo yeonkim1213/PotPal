@@ -116,12 +116,13 @@ function Post() {
         // handle error
       })
       .then((tasks) => {
-        tasks.basketList.push(users[Number(event) - 1]);
-        console.log(tasks.basketList);
+        // tasks.basketList.push(users[Number(event) - 1]);
+        // console.log(tasks.basketList);
+        
         const indexOfObject = tasks.available.findIndex((object) => {
           return object.id === event;
         });
-
+        tasks.basketList.unshift(tasks.available[indexOfObject])
         if (indexOfObject !== -1) {
           tasks.available.splice(indexOfObject, 1);
         }
@@ -152,6 +153,7 @@ function Post() {
       .catch((error) => {
         // handle error
       });
+      router.replace('/home')
   };
 
   return users.map((element) => {

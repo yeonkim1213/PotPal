@@ -26,7 +26,7 @@ const basket = ()=> {
       .then((tasks) => {
         // tasks.basketList.push(users[Number(event) - 1]);
         // console.log(tasks.basketList);
-        const availList = tasks.available.concat(tasks.basketList)
+        const availList = tasks.basketList.concat(tasks.available)
         tasks.basketList = [];
         fetch("https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/1", {
           method: "PUT", // or PATCH
@@ -54,14 +54,17 @@ const basket = ()=> {
       .catch((error) => {
         // handle error
       });
+      router.replace('/basket');
   };
 
     return (
       <>
-      <Stack.Screen
-      options={{
-        title: "Your Basket",
-      }}/>
+      <Pressable onPress={()=>router.replace('/basket')}>
+        <Stack.Screen
+        options={{
+          title: "Your Basket",
+        }}/>
+      </Pressable>
         <View style={styles.container}>
         {/* Search bar */}  
             <Button style={{backgroundColor: '#FF5252', color:'white'}} onPress={deleteBasket}>Delete All</Button>
