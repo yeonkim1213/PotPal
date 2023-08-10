@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Alert, StyleSheet, Text } from "react-native";
+import { Alert, StyleSheet, Text, Image } from "react-native";
 import { Anchor, Button, Input, XStack, YStack } from "tamagui";
 import { useMutation } from "@tanstack/react-query";
 import { sendLogin } from "../api/sendLogin";
 import { useRouter } from "expo-router";
-import { Image } from "expo-image";
 
 export function LoginForm() {
   const router = useRouter();
