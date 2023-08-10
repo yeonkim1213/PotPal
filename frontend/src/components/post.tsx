@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -18,18 +17,10 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { transactions } from "../user/transactions"; //have fetching already
+// import { transactions } from "../user/transactions"; //have fetching already
 import { XStack, YStack } from "tamagui";
 import { idFn } from "tamagui/types/setup";
 import { useRouter } from "expo-router";
-=======
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, ScrollView, TouchableHighlight, ImageBackground, Pressable } from "react-native";
-import { Entypo, Ionicons, Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-// import { transactions } from "../user/transactions"; //have fetching already
-import { XStack, YStack } from 'tamagui';
->>>>>>> 05a1d7a0d734fb282c0025f8b393e9dae576e567
 
 interface User {
   id: string;

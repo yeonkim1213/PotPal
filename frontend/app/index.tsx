@@ -75,13 +75,7 @@ export default () => {
           headerShown: false,
         }}
       />
-<<<<<<< HEAD
-
-      <Image source={require("../assets/logo.png")} style={styles.imageStyle} />
-      <Menu />
-=======
       <LogoScreen />
->>>>>>> 05a1d7a0d734fb282c0025f8b393e9dae576e567
     </YStack>
   );
 };

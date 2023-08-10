@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView, Text, Image, Pressable} from "react-native";
-import Menu from './menu';
-import Search from './search';
-import Post from './post';
 import { Button, XStack, YStack,  } from 'tamagui';
 import { useRouter, Stack } from 'expo-router';
 import { Entypo, Ionicons, Octicons } from '@expo/vector-icons';
