@@ -11,7 +11,51 @@ import PostBasket from '../src/components/postBasket';
 
 
 const basket = ()=> {
-  const router = useRouter() 
+  const router = useRouter();
+  const deleteBasket = ()=>{
+    fetch("https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/1", {
+      method: "GET",
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        // handle error
+      })
+      .then((tasks) => {
+        // tasks.basketList.push(users[Number(event) - 1]);
+        // console.log(tasks.basketList);
+        const availList = tasks.available.concat(tasks.basketList)
+        tasks.basketList = [];
+        fetch("https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/1", {
+          method: "PUT", // or PATCH
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            basketList: tasks.basketList,
+            basket: tasks.basketList.length,
+            available: availList
+          }),
+        })
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+            // handle error
+          })
+          .then((task) => {
+            // console.log(task);
+            // Do something with updated task
+          })
+          .catch((error) => {
+            // handle error
+          });
+      })
+      .catch((error) => {
+        // handle error
+      });
+  };
+
     return (
       <>
       <Stack.Screen
@@ -20,7 +64,7 @@ const basket = ()=> {
       }}/>
         <View style={styles.container}>
         {/* Search bar */}  
-            <Button onPress={()=>router.replace("/home")}>Hello</Button>
+            <Button style={{backgroundColor: '#FF5252', color:'white'}} onPress={deleteBasket}>Delete All</Button>
             <ScrollView style={{
             flex: 1,
             margin: 5,

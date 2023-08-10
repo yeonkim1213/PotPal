@@ -37,6 +37,7 @@ function SearchPost() {
 
 
 
+
   const fetchBasketData = () => {
     fetch("https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/1")
       .then(response => {
@@ -51,6 +52,58 @@ function SearchPost() {
     fetchBasketData()
   }, [])
 
+  const addBasket = (event) => {
+    fetch("https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/1", {
+      method: "GET",
+      headers: { "content-type": "application/json" },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        // handle error
+      })
+      .then((tasks) => {
+        
+        console.log(tasks.basketList);
+        const indexOfObject = tasks.available.findIndex((object) => {
+          return object.id === event;
+        });
+        tasks.basketList.push(tasks.available[indexOfObject]);
+        if (indexOfObject !== -1) {
+          tasks.available.splice(indexOfObject, 1);
+        }
+
+        fetch("https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/1", {
+          method: "PUT", // or PATCH
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            basketList: tasks.basketList,
+            basket: tasks.basketList.length,
+            available: tasks.available
+          }),
+        })
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+            // handle error
+          })
+          .then((task) => {
+            // console.log(task);
+            // Do something with updated task
+          })
+          .catch((error) => {
+            // handle error
+          });
+      })
+      .catch((error) => {
+        // handle error
+      });
+  };
+
+
+
   const renderPost = (posts) => {
     return posts.map(element => {
         return(
@@ -58,7 +111,7 @@ function SearchPost() {
             <LinearGradient style={{borderRadius: 15}} colors={['rgba(217,217,217,0)', 'rgba(217,217,217,0.32)', 'rgba(217,217,217,1)']}>
                 <View style={{width: '100%', aspectRatio: 1, borderRadius: 15, justifyContent: 'space-between', display:'flex', padding: 7}}>
                   <XStack style={{justifyContent: 'flex-end'}}>
-                    <Pressable style={{borderRadius: 25, backgroundColor: '#fff', margin: 5, borderWidth: 1,padding: 7, borderColor: "#155A03"}}>
+                    <Pressable onPress={() => addBasket(element.id)} style={{borderRadius: 25, backgroundColor: '#fff', margin: 5, borderWidth: 1,padding: 7, borderColor: "#155A03"}}>
                       <MaterialCommunityIcons key={element.id} id ={element.id} name="basket-plus-outline" size={24} color="#155A03" />
                     </Pressable>
                   </XStack>
@@ -105,7 +158,7 @@ function SearchPost() {
       }}/>
 
       <View style={styles.container}>
-      <View style = {{flexDirection: 'row', justifyContent: 'space-around', zIndex: 2}}>
+      <View style = {{flexDirection: 'row', justifyContent: 'space-around', zIndex: 2, marginBottom: 5}}>
           <View style = {{flexDirection: 'row', justifyContent: 'space-between', borderWidth: 2, borderRadius: 20, borderColor: '#155A03'}}>
             <View style = {{flexDirection: 'row', alignItems: 'center'}}>
               {/* Search Icon */}
