@@ -32,7 +32,7 @@ function Menu() {
         height: 77,
         position: "absolute",
         bottom: 0,
-        zIndex: -1,
+        zIndex: 100,
         marginBottom: 15,
         marginTop: 20,
       }}

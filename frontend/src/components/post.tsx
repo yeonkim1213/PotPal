@@ -118,12 +118,21 @@ function Post() {
       .then((tasks) => {
         tasks.basketList.push(users[Number(event) - 1]);
         console.log(tasks.basketList);
+        const indexOfObject = tasks.available.findIndex((object) => {
+          return object.id === event;
+        });
+
+        if (indexOfObject !== -1) {
+          tasks.available.splice(indexOfObject, 1);
+        }
+
         fetch("https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/1", {
           method: "PUT", // or PATCH
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
             basketList: tasks.basketList,
             basket: tasks.basketList.length,
+            available: tasks.available
           }),
         })
           .then((res) => {

@@ -137,7 +137,14 @@ function SearchPost() {
     
       </View>
 
-      <ScrollView>
+      <ScrollView style={{
+            flex: 1,
+            margin: 5,
+            padding: 10,
+            zIndex: -2,
+            marginBottom: 70,
+          }}
+>
         {renderPost(searchPost)}
       </ScrollView>
       <Menu />

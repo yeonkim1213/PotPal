@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, StyleSheet, Text, Image } from "react-native";
+import { Alert, StyleSheet, Text, Image, Pressable } from "react-native";
 import { Anchor, Button, Input, XStack, YStack } from "tamagui";
 import { useMutation } from "@tanstack/react-query";
 import { sendLogin } from "../api/sendLogin";
@@ -34,10 +34,12 @@ export function LoginForm() {
     >
       <YStack padding="$13" alignItems="center" justifyContent="center">
         <XStack alignItems="center" justifyContent="center">
+          <Pressable onPress={()=>router.replace("/home")}>
           <Image
             source={require("../../assets/logo.png")}
             style={styles.imageStyle}
           />
+          </Pressable>
         </XStack>
       </YStack>
 
