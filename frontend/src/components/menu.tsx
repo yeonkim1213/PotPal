@@ -98,11 +98,12 @@ function Menu() {
             </View>
           </TouchableHighlight>
 
-          {/* Account Icon */}
-          <TouchableHighlight
+         {/* Account Icon */}
+         <TouchableHighlight
             style={{ justifyContent: "flex-end" }}
             onPress={() => {
               console.log("Pressed");
+              router.replace("/myprofile");
             }}
             underlayColor="transparent"
           >
