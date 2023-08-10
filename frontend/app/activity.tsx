@@ -1,4 +1,6 @@
 import { Stack } from "expo-router";
+import { YStack } from "tamagui";
+import Menu from "../src/components/menu";
 
 import TransactionPage from "../src/components/TransactionPage";
 
@@ -10,7 +12,7 @@ export default () => {
           headerShown: false,
         }}
       />
-      <TransactionPage name="Elsa"></TransactionPage>
+      <TransactionPage id={1}></TransactionPage>
     </>
   );
 };

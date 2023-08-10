@@ -1,86 +1,164 @@
-import { FlatList, TextInput } from "react-native";
+import { FlatList, TextInput, Text, View, StyleSheet } from "react-native";
 import Transaction from "./Transaction.js";
-import { convertDateToString } from "./CalendarButton.js";
+import { YStack } from "tamagui";
+import Menu from "./menu";
+import React from "react";
+import { convertDateToString } from "./post";
+// import { useEffect, useState } from "react-native";
+import { setStatusBarTranslucent } from "expo-status-bar";
 
 //Update to use data from the API
 export default function TransactionPage(props) {
-  // console.log(transactions);
-  const name = props.name;
-  // console.log(name);
+  const id = props.id;
+  const [transactions, setTransactions] = React.useState([]);
 
-  const transactions = [
-    {
-      date: new Date(2023, 1, 23),
-      lenderName: "Betty",
-      receiverName: "Benny",
-      itemName: "baking pan",
-    },
-    {
-      date: new Date(2022, 4, 17),
-      lenderName: "Anna",
-      receiverName: "Elsa",
-      itemName: "cooking pan",
-    },
-    {
-      date: new Date(2022, 1, 11),
-      lenderName: "Elsa",
-      receiverName: "Sarah H.",
-      itemName: "spatula",
-    },
-    {
-      date: new Date(2022, 0, 13),
-      lenderName: "Elsa",
-      receiverName: "Betty",
-      itemName: "strainer",
-    },
-  ];
+  // const dataToPush = [
+  //   {
+  //     date: new Date(2023, 1, 23),
+  //     lent: true,
+  //     otherParty: "Bob",
+  //     itemName: "baking pan",
+  //     id: 1,
+  //   },
+  //   {
+  //     date: new Date(2022, 4, 17),
+  //     lent: false,
+  //     otherParty: "Elsa",
+  //     itemName: "cooking pan",
+  //     id: 2,
+  //   },
+  //   {
+  //     date: new Date(2022, 1, 11),
+  //     lent: true,
+  //     otherParty: "Anna",
+  //     itemName: "spatula",
+  //     id: 3,
+  //   },
+  //   {
+  //     date: new Date(2022, 0, 13),
+  //     lent: false,
+  //     otherParty: "Betty",
+  //     itemName: "strainer",
+  //     id: 4,
+  //   },
+  // ];
 
-  function filterDataByName(originalTransactions) {
-    let filteredTransactions = [];
-    let filteredIndex = 0;
-    for (let i = 0; i < originalTransactions.length; i++) {
-      let object = originalTransactions[i];
-      if (object.lenderName === name || object.receiverName === name) {
-        filteredTransactions[filteredIndex] = object;
-        filteredIndex++;
-      }
-    }
-    return filteredTransactions;
-  }
+  // function pushTransactions() {
+  //   console.log("In push transactions");
+  //   fetch(
+  //     "https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/" + id.toString(),
+  //     {
+  //       method: "GET",
+  //       headers: { "content-type": "application/json" },
+  //     },
+  //   )
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //       // handle error
+  //     })
+  //     .then((tasks) => {
+  //       console.log("Before pushing");
+  //       console.log(tasks.transactions);
+  //       for (let i = 0; i < dataToPush.length; i++) {
+  //         tasks.transactions.push(dataToPush[i]);
+  //       }
+  //       console.log("Transactions");
+  //       console.log(tasks.transactions);
+  //       fetch(
+  //         "https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/" + id.toString(),
+  //         {
+  //           method: "PUT", // or PATCH
+  //           headers: { "content-type": "application/json" },
+  //           body: JSON.stringify({
+  //             transactions: tasks.transactions,
+  //           }),
+  //         },
+  //       )
+  //         .then((res) => {
+  //           if (res.ok) {
+  //             return res.json();
+  //           }
+  //           // handle error
+  //         })
+  //         .then((task) => {
+  //           // Do something with updated task
+  //         })
+  //         .catch((error) => {
+  //           // handle error
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       // handle error
+  //     });
+  // }
 
-  function convertObjectToStringDate(object) {
-    const date = convertDateToString(object.date);
-    if (object.lenderName === name) {
-      return [
-        "You lent a " + object.itemName + " to " + object.receiverName + ".",
-        date,
-      ];
-    } else {
-      return [
-        object.lenderName + " lent a " + object.itemName + " to you.",
-        date,
-      ];
-    }
-  }
+  // // pushTransactions();
 
-  const filteredTransactionsArr = filterDataByName(transactions);
-  // console.log("filtered");
-  // console.log(filteredTransactionsArr);
+  React.useEffect(() => {
+    const fetchTransactionData = async () => {
+      const resp = await fetch(
+        "https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/" + id.toString(),
+      );
+      const data = await resp.json();
+      setTransactions(data.transactions);
+    };
+    fetchTransactionData();
+  }, []);
 
-  const dataValues = filteredTransactionsArr.map(convertObjectToStringDate);
+  console.log(transactions);
 
   return (
-    <FlatList
-      alwaysBounceVertical={false}
-      data={dataValues}
-      renderItem={(itemData) => {
-        return (
-          <Transaction
-            text={itemData.item[0]}
-            date={itemData.item[1]}
-          ></Transaction>
-        );
-      }}
-    ></FlatList>
+    <YStack
+      flex={1}
+      justifyContent="flex-start"
+      alignItems="stretch"
+      space={50}
+      backgroundColor="white"
+    >
+      <YStack padding="$3"></YStack>
+      <View style={{ marginLeft: 16 }}>
+        <Text style={{ fontSize: 23, fontWeight: "bold", marginBottom: 15 }}>
+          Your transactions
+        </Text>
+        <FlatList
+          alwaysBounceVertical={false}
+          data={transactions}
+          renderItem={(itemData) => {
+            if (itemData.item.lent) {
+              return (
+                <Transaction
+                  text={
+                    "You lent a " +
+                    itemData.item.itemName +
+                    " to " +
+                    itemData.item.otherParty +
+                    "."
+                  }
+                  date={convertDateToString(itemData.item.date)}
+                ></Transaction>
+              );
+            } else {
+              return (
+                <Transaction
+                  text={
+                    itemData.item.otherParty +
+                    " lent a " +
+                    itemData.item.itemName +
+                    " to you."
+                  }
+                  date={convertDateToString(itemData.item.date)}
+                ></Transaction>
+              );
+            }
+          }}
+        ></FlatList>
+      </View>
+
+      <View style={{ marginTop: "auto" }}>
+        <Menu></Menu>
+      </View>
+    </YStack>
   );
 }

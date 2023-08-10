@@ -2,19 +2,119 @@ import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import React from "react";
 import CurrencyInput from "react-native-currency-input";
-import CalendarButton, { convertDateToString } from "./CalendarButton";
+import CalendarButton from "./CalendarButton";
 import * as ImagePicker from "expo-image-picker";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { ChevronLeft } from "@tamagui/lucide-icons";
 import { YStack } from "tamagui";
 // import { Image } from "expo-image";
+import Menu from "./menu";
 
 //Image Picker code from Expo Image Picker
 //Currency input code from example Github for currency input
 //Calendar code taught by Declan Miller
 
 export default function PostForm() {
+  const id = 1;
+
+  let datePosted = new Date();
+
+  function addPost() {
+    // getPostInfo();
+    fetch(
+      "https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/" + id.toString(),
+      {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+      },
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        // handle error
+      })
+      .then((data) => {
+        let postID = (data.available.length + 1).toString();
+        data.available.unshift({
+          date: startDate,
+          name: data.name,
+          avatar: data.avatar,
+          rating: data.rating,
+          item: itemName,
+          itemImage: image,
+          location: data.location,
+          condition: dropdownValue,
+          brand: brand,
+          endDate: endDate,
+          datePosted: new Date(),
+          id: postID,
+          price: price,
+        });
+
+        fetch("https://64c881f3a1fe0128fbd5db6f.mockapi.io/available", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          // Send your data in the request body as JSON
+          body: JSON.stringify({
+            date: startDate,
+            name: data.name,
+            avatar: data.avatar,
+            rating: data.rating,
+            item: itemName,
+            itemImage: image,
+            location: data.location,
+            condition: dropdownValue,
+            brand: brand,
+            endDate: endDate,
+            datePosted: new Date(),
+            id: postID,
+            price: price,
+          }),
+        })
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+            // handle error
+          })
+          .then((task) => {
+            // do something with the new task
+          })
+          .catch((error) => {
+            // handle error
+          });
+
+        fetch(
+          "https://64c881f3a1fe0128fbd5db6f.mockapi.io/posts/" + id.toString(),
+          {
+            method: "PUT", // or PATCH
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              available: data.available,
+            }),
+          },
+        )
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+            // handle error
+          })
+          .then((task) => {
+            // console.log(task);
+            // Do something with updated task
+          })
+          .catch((error) => {
+            // handle error
+          });
+      })
+      .catch((error) => {
+        // handle error
+      });
+  }
+
   const data = ["Brand new", "Lightly used", "Heavily used"];
 
   const [image, setImage] = React.useState(null);
@@ -42,7 +142,6 @@ export default function PostForm() {
     });
 
     if (!result.canceled) {
-      console.log(result.assets[0].uri);
       setImage(result.assets[0].uri);
       if (icon === "add-circle-outline") {
         setIcon("md-checkmark-circle");
@@ -60,16 +159,11 @@ export default function PostForm() {
       flex={1}
       justifyContent="flex-start"
       alignItems="stretch"
-      px={16}
-      pt={16}
-      pb={24}
-      space={20}
+      space={50}
       backgroundColor="white"
     >
       <YStack padding="$3"></YStack>
-      {/* not sure if this is correct */}
-      <ChevronLeft onPress={() => router.replace("/")}></ChevronLeft>
-      <View>
+      <View style={{ marginLeft: 16 }}>
         <Text style={styles.headingStyle}>Share with your community!</Text>
 
         <Text style={styles.labelStyle}>Upload an image</Text>
@@ -144,26 +238,16 @@ export default function PostForm() {
             color="white"
             accessibilityLabel="This is a button to make a post"
             onPress={() => {
+              addPost();
               router.push({
-                pathname: "/posts",
-                params: {
-                  rating: 4.7,
-                  distance: 1.2,
-                  itemName: itemName,
-                  brandName: brand,
-                  price: price,
-                  startDate: convertDateToString(startDate),
-                  endDate: convertDateToString(endDate),
-                  condition: dropdownValue,
-                  username: "user570",
-                  // image: image,
-                  profileImage:
-                    "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[",
-                },
+                pathname: "/home",
               });
             }}
           />
         </View>
+      </View>
+      <View style={{ marginTop: 110 }}>
+        <Menu></Menu>
       </View>
     </YStack>
   );
@@ -197,8 +281,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#155A03",
     width: 110,
     marginTop: 20,
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginLeft: 120,
+    marginRight: 100,
   },
   inputContainer: {
     borderColor: "#155A03",
@@ -253,5 +337,3 @@ const styles = StyleSheet.create({
     textAlignVertical: "auto",
   },
 });
-
-// export default PostForm;

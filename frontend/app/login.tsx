@@ -14,3 +14,12 @@ export default () => {
     </>
   );
 };
+
+// const blurhash="";
+// <message></message>
+// <message
+//   name="Anna"
+//   mostRecentMessage="I'm right by the swings"
+//   date="2/19/22"
+//   avatar={blurhash}
+// />

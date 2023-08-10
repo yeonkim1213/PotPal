@@ -82,16 +82,6 @@ export default () => {
 
       <Image source={require("../assets/logo.png")} style={styles.imageStyle} />
       <Menu />
-      {/* <Button
-        href="/login"
-        onPress={() => router.replace("/login")}
-        style={{ margin: 10 }}
-      >
-        Click Me
-      </Button>
-      <Button href="/login" onPress={() => router.replace("/postform")}>
-        Make a post form!
-      </Button> */}
     </YStack>
   );
 };

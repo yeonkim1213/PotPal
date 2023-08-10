@@ -27,10 +27,14 @@ function Menu() {
     <View
       style={{
         width: "100%",
+        flex: 1,
+        // alignSelf: "stretch",
         height: 77,
         position: "absolute",
         bottom: 0,
         zIndex: -1,
+        marginBottom: 15,
+        marginTop: 20,
       }}
     >
       <ImageBackground
@@ -42,7 +46,7 @@ function Menu() {
           {/* Home Icon */}
           <TouchableHighlight
             style={{ justifyContent: "flex-end" }}
-            onPress={() => router.replace("/posts")}
+            onPress={() => router.replace("/home")}
             underlayColor="transparent"
           >
             <View style={styles.menuIcon}>
@@ -88,6 +92,7 @@ function Menu() {
           <TouchableHighlight
             style={{ justifyContent: "flex-end" }}
             onPress={() => {
+              router.replace("/inbox");
               console.log("Pressed");
             }}
             underlayColor="transparent"
@@ -121,7 +126,7 @@ function Menu() {
 const styles = StyleSheet.create({
   menuIcon: {
     flexDirection: "column",
-    // justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     alignItems: "center",
     color: "#155A03",
     textDecorationColor: "#155A03",

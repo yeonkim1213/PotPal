@@ -13,9 +13,9 @@ function Transaction(props) {
 
 const styles = StyleSheet.create({
   transactionBox: {
-    marginLeft: 20,
     marginRight: 20,
     marginBottom: 15,
+    marginTop: 15,
     width: "auto",
     height: 50,
     borderRadius: 10,
